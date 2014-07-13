@@ -22,7 +22,7 @@ while key != 27:
 		x.turn_left()
 	elif key == curses.KEY_RIGHT:
 		x.turn_right()
-	elif key in map(lambda i:str(i),[1,2,3,4,5,6,7,8,9,0]):
+	elif key in map(lambda i:ord(str(i)),[1,2,3,4,5,6,7,8,9,0]):
 		x.action(key)
 	elif key == ord('h'):
 		x.head_left()
