@@ -68,14 +68,26 @@ class Rapiro:
 		self.rapiro.write(mkcmd(self.HEAD,angle,time))
 		self.current_angles[self.HEAD] = angle 
 
+	def head_is_left_most(self):
+		return self.current_angles[self.HEAD] >= 160
+
+	def head_is_right_most(self):
+		return self.current_angles[self.HEAD] <= 10
+
 	def head_left(self):
-		self.rapiro.write(mkcmd(self.HEAD,self.current_angles[self.HEAD]+5,1))
-		self.current_angles[self.HEAD] += 5 
+		if self.head_is_left_most():
+			pass
+		else:
+			self.rapiro.write(mkcmd(self.HEAD,self.current_angles[self.HEAD]+5,1))
+			self.current_angles[self.HEAD] += 5 
 		time.sleep(0.05)
 
 	def head_right(self):
-		self.rapiro.write(mkcmd(self.HEAD,self.current_angles[self.HEAD]-5,1))
-		self.current_angles[self.HEAD] -= 5 
+		if self.head_is_right_most():
+			pass
+		else:
+			self.rapiro.write(mkcmd(self.HEAD,self.current_angles[self.HEAD]-5,1))
+			self.current_angles[self.HEAD] -= 5 
 		time.sleep(0.05)
 
 

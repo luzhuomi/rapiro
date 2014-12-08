@@ -185,11 +185,11 @@ if __name__ == "__main__":
                 [p_label, p_confidence] = model.predict(np.asarray(roi))
                 name = "unknown"
                 if p_label != -1 : name = names[p_label]
-		print "x=%d,y=%d,x'=%d,y'=%d,name=%s" % (x,y,(x+w),(y+h),name)
+		print "x=%d,y=%d,x'=%d,y'=%d,conf=%.2f,name=%s" % (x,y,(x+w),(y+h),p_confidence,name)
                 cv2.putText( img, "%s %.2f" % (name, p_confidence),(x+10,y+20), cv2.FONT_HERSHEY_PLAIN,1.3, (0,200,0))
             if x > 370:
                 rapi.head_right()
-	    elif x < 240:
+	    elif x < 230:
 		rapi.head_left()
 	    else:
 		pass
