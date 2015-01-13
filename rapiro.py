@@ -113,7 +113,7 @@ class Rapiro:
 			# train it from faces in the imgdir:
 			self.images,self.labels,self.names = retrain(self.training_img_dir,self.model,self.face_size)
 
-			print "trained:",len(images),"images",len(names),"persons"
+			print "trained:",len(self.images),"images",len(self.names),"persons"
 			return True
 		else:
 			return True
