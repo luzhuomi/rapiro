@@ -77,7 +77,7 @@ try:
 			x.reset()
 		elif key == ord('f'):
 			x.look_for_face()
-except Error as e:
+except Exception as e:
 	raise(e)
 finally:	
 	curses.endwin()

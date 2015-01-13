@@ -124,7 +124,7 @@ class Rapiro:
 		if self.cam is None:
 			self.init_cam()
 
-		rotation = self.head_right()
+		rotation = self.head_right
 
 
 		while (not found) and (self.cam is not None):
@@ -132,7 +132,7 @@ class Rapiro:
 			ret, img = self.cam.read()
 			gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 			gray = cv2.equalizeHist(gray)
-			rects = cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
+			rects = self.cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
 
 			roi = None
 
@@ -146,7 +146,7 @@ class Rapiro:
 				if len(self.images)>0:
 					# model.predict is going to return the predicted label and
 					# the associated confidence:
-					[p_label, p_confidence] = model.predict(np.asarray(roi))
+					[p_label, p_confidence] = self.model.predict(np.asarray(roi))
 					
 					name = "unknown"
 
@@ -154,14 +154,14 @@ class Rapiro:
 					print "x=%d,y=%d,x'=%d,y'=%d,conf=%.2f,name=%s" % (x,y,(x+w),(y+h),p_confidence,name)
 					result['name'] = name
 					result['confidence'] = p_confidence
-				results.add(result)
+				results.append(result)
 			results = sorted(results, lambda x,y: cmp(y['confidence'],x['confidence']))
 
 			if len(results) == 0:
 				if self.head_is_left_most():
-					rotation = self.head_right()
+					rotation = self.head_right
 				elif self.head_is_right_most():
-					rotation = self.head_left()
+					rotation = self.head_left
 				rotation()
 			else:
 				print "found %s" % (results[0])
