@@ -126,7 +126,7 @@ class Rapiro:
 		rotation = self.head_right()
 
 
-		while (not found) && (self.cam is not None):
+		while (not found) and (self.cam is not None):
 			print "searching..."
 			ret, img = self.cam.read()
 			gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
