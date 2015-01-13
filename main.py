@@ -25,6 +25,8 @@ try:
 			x.turn_right()
 		elif key in map(lambda i:ord(str(i)),[1,2,3,4,5,6,7,8,9,0]):
 			x.action(int(chr(key)))
+		elif key == ord('y'):
+			x.blink_yellow()
 		elif key == ord('h'):
 			x.head_left()
 		elif key == ord('H'):

@@ -11,6 +11,9 @@ import random
 
 rand = random.Random()
 
+
+from text2speech import speak
+
 def mkstr(n,digits):
 	return (("0" * digits) + str(n))[-digits:]
 
@@ -18,6 +21,9 @@ def mkstr(n,digits):
 
 def mkcmd(servo, angle, time):
 	return ("#PS%sA%sT%s" % (mkstr(servo,2), mkstr(angle,3), mkstr(time,3)))
+
+def ledcmd(rgb,time):
+	return ("#PR" + str(int(rgb[0])).zfill(3) + "G" + str(int(rgb[1])).zfill(3) + "B" + str(int(rgb[2])).zfill(3) + "T" + mkstr(time,3))
 
 class Rapiro:
 
@@ -166,6 +172,8 @@ class Rapiro:
 			else:
 				print "found %s" % (results[0])
 				found = True
+				speak("hello %s" % (results[0]['name']))
+				self.blink_yellow()
 		return
 
 
@@ -177,6 +185,11 @@ class Rapiro:
 		self.rapiro.write("#M00")
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
+
+	def blink_yellow(self):
+		self.rapiro.write(ledcmd([255,255,0],1))
+                self.rapiro.write(ledcmd(self.current_leds,1))
+		return
 
 	def head(self,angle,time):
 		self.rapiro.write(mkcmd(self.HEAD,angle,time))
