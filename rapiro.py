@@ -403,12 +403,12 @@ def retrain(imgpath, model,sz ) :
 	if len(X) == 0:
 		print "image path empty", imgpath
 	 	return [[],[],[]]
-		# Learn the model. Remember our function returns Python lists,
-		# so we use np.asarray to turn them into NumPy lists to make
-	    # the OpenCV wrapper happy:
-	    # Also convert labels to 32bit integers. This is a workaround for 64bit machines,
-		model.train(np.asarray(X), np.asarray(y, dtype=np.int32))
-		return [X,y,names]		
+	# Learn the model. Remember our function returns Python lists,
+	# so we use np.asarray to turn them into NumPy lists to make
+	# the OpenCV wrapper happy:
+	# Also convert labels to 32bit integers. This is a workaround for 64bit machines,
+	model.train(np.asarray(X), np.asarray(y, dtype=np.int32))
+	return [X,y,names]		
 
 
 
