@@ -3,6 +3,12 @@ import sys
 import time
 import serial
 
+import cv2
+import numpy as np
+
+import random
+
+rand = random.Random()
 
 def mkstr(n,digits):
 	return (("0" * digits) + str(n))[-digits:]
@@ -19,6 +25,7 @@ class Rapiro:
 	RAPIRO_TTY = '/dev/ttyAMA0'
 	rapiro = serial.Serial(RAPIRO_TTY, 57600, timeout = 10)
 
+	# servo IDs
 	HEAD=0
 	WAIST=1
 	RIGHT_SHOULDER_Y=2
@@ -32,11 +39,27 @@ class Rapiro:
 	LEFT_FOOT_Y=10
 	LEFT_FOOT_P=11
 
+	# initial angles
 	ANGLES = [90, 90,0,130, 90,180, 50, 90, 90, 90, 90, 90] 
+
+	# LED colors
 	LEDS = [0,0,255]
 
 	current_angles = []
 	current_leds = []
+
+	# TODO move them to settings
+	training_img_dir = "./pics"
+	cascade_model_file = "/usr/local/share/OpenCV/haarcascades/haarcascade_frontalface_default.xml"
+	face_size=(90,90)
+	cam = None
+	model = None
+	images = None
+	labels = None
+	names = None
+
+
+
 
 	def __init__(self):
 		# version check
@@ -48,12 +71,102 @@ class Rapiro:
 		version = version.split("#Ver")[1]
 
 		if(version != "00"):
-		    print "ERROR: Firmware of Rapiro is different."
-		    sys.exit(1)		
+			print "ERROR: Firmware of Rapiro is different."
+			sys.exit(1)		
 
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
 		return
+
+
+
+	def init_cam(self):
+		if self.cam is None:
+			import os.path
+			if not os.path.isfile(self.cascade_model_file):
+				print "Cascade model (%s) not found." % (self.cascade_model_file)
+				return False
+
+			if not os.path.isdir(self.training_img_dir):
+				print "Training directory (%s) not found." % (self.training_img_dir)
+				print "Creating..."
+				os.mkdir(self.training_img_dir)
+
+			self.cam = cv2.VideoCapture(0)
+
+			if ( not self.cam.isOpened() ):
+				print "no cam!"
+				return False
+			
+			print "cam: ok."
+			self.cascade = cv2.CascadeClassifier(self.cascade_model_file)
+			if ( self.cascade.empty() ):
+				print "no cascade!"
+				return False
+
+			print "cascade: ok"
+
+			# create the model
+			self.model = cv2.createFisherFaceRecognizer()
+
+			# train it from faces in the imgdir:
+			self.images,self.labels,self.names = retrain(self.training_img_dir,self.model,self.face_size)
+
+			print "trained:",len(images),"images",len(names),"persons"
+			return True
+		else:
+			return True
+
+
+	def look_for_face(self):
+		found = False
+		if self.cam is None:
+			self.init_cam()
+
+		rotation = self.head_right()
+
+
+		while (not found) && (self.cam is not None):
+			print "searching..."
+			ret, img = self.cam.read()
+			gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+			gray = cv2.equalizeHist(gray)
+			rects = cascade.detectMultiScale(gray, scaleFactor=1.3, minNeighbors=4, minSize=(30, 30), flags = cv2.CASCADE_SCALE_IMAGE)
+
+			roi = None
+
+			results = []
+			for x, y, w, h in rects:
+				# crop & resize it 
+				roi = cv2.resize( gray[y:y+h, x:x+h], self.face_size )
+				# give some visual feedback for the cascade detection
+				cv2.rectangle(img, (x,y),(x+w,y+h), (255, 0, 0))
+				result = { 'name' : 'unknown', 'confidence' : 0}
+				if len(self.images)>0:
+					# model.predict is going to return the predicted label and
+					# the associated confidence:
+					[p_label, p_confidence] = model.predict(np.asarray(roi))
+					
+					name = "unknown"
+
+					if p_label != -1 : name = self.names[p_label]
+					print "x=%d,y=%d,x'=%d,y'=%d,conf=%.2f,name=%s" % (x,y,(x+w),(y+h),p_confidence,name)
+					result['name'] = name
+					result['confidence'] = p_confidence
+				results.add(result)
+			results = sorted(results, lambda x,y: cmp(y['confidence'],x['confidence']))
+
+			if len(results) == 0:
+				if self.head_is_left_most():
+					rotation = self.head_right()
+				elif self.head_is_right_most():
+					rotation = self.head_left()
+				rotation()
+			else:
+				print "found %s" % (results[0])
+				found = True
+		return
+
 
 
 	def reset(self):
@@ -281,6 +394,61 @@ class Rapiro:
 	def action(self,n):
 		self.rapiro.write("#M"+mkstr(n,2))
 
+
+# image retrain
+def retrain(imgpath, model,sz ) :
+	# read in the image data. This must be a valid path!
+	X,y,names = read_images(imgpath,sz)
+	if len(X) == 0:
+		print "image path empty", imgpath
+	 	return [[],[],[]]
+		# Learn the model. Remember our function returns Python lists,
+		# so we use np.asarray to turn them into NumPy lists to make
+	    # the OpenCV wrapper happy:
+	    # Also convert labels to 32bit integers. This is a workaround for 64bit machines,
+		model.train(np.asarray(X), np.asarray(y, dtype=np.int32))
+		return [X,y,names]		
+
+
+
+# added a names list(z)
+def read_images(path, sz=None):
+    """Reads the images in a given folder, resizes images on the fly if size is given.
+
+    Args:
+        path: Path to a folder with subfolders representing the subjects (persons).
+        sz: A tuple with the size Resizes
+
+    Returns:
+        A list [X,y,z]
+
+            X: The images, which is a Python list of numpy arrays.
+            y: The corresponding labels (the unique number of the subject, person) in a Python list.
+            z: A list of person-names, indexed by label
+    """
+    c = 0
+    X,y,z = [], [], []
+    for dirname, dirnames, filenames in os.walk(path):
+        for subdirname in dirnames:
+            subject_path = os.path.join(dirname, subdirname)
+            for filename in os.listdir(subject_path):
+                try:
+                    im = cv2.imread(os.path.join(subject_path, filename), cv2.IMREAD_GRAYSCALE)
+                    if (len(im)==0):
+                        continue # not an image                        
+                    # resize to given size (if given)
+                    if (sz is not None):
+                        im = cv2.resize(im, sz)
+                    X.append(np.asarray(im, dtype=np.uint8))
+                    y.append(c)
+                except IOError, (errno, strerror):
+                    print "I/O error({0}): {1}".format(errno, strerror)
+                except:
+                    print "Unexpected error:", sys.exc_info()[0]
+                    raise
+            c = c+1
+            z.append(subdirname)
+    return [X,y,z]
 
 
 

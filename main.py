@@ -74,6 +74,7 @@ while key != 27:
 		x.right_foot_p_right()
 	elif key == ord('i'):
 		x.reset()
-
+	elif key == ord('f')
+		x.look_for_face()
 
 curses.endwin()
