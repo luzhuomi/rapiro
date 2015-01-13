@@ -76,6 +76,4 @@ while key != 27:
 		x.reset()
 
 
-
-
-
+curses.endwin()
