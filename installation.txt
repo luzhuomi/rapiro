@@ -1,1 +1,1 @@
-sudo apt-get install festival
+sudo apt-get install festival bottle
