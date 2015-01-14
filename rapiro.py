@@ -124,6 +124,13 @@ class Rapiro:
 		else:
 			return True
 
+	def close_cam(self):
+		if self.cam is None:
+			pass
+		else:
+			self.cam = None
+		
+
 
 	def look_for_face(self):
 		found = False
@@ -173,7 +180,8 @@ class Rapiro:
 				print "found %s" % (results[0])
 				found = True
 				speak("hello %s" % (results[0]['name']))
-				self.blink_yellow()
+				self.blink_yellow(3)
+				self.close_cam()
 		return
 
 
@@ -186,9 +194,10 @@ class Rapiro:
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
 
-	def blink_yellow(self):
-		self.rapiro.write(ledcmd([255,255,0],1))
-                self.rapiro.write(ledcmd(self.current_leds,1))
+
+	def blink_yellow(self,t):
+		self.rapiro.write(ledcmd([255,255,0],t))
+                self.rapiro.write(ledcmd(self.current_leds,t))
 		return
 
 	def head(self,angle,time):
