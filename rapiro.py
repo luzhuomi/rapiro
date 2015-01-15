@@ -179,8 +179,8 @@ class Rapiro:
 			else:
 				print "found %s" % (results[0])
 				found = True
-				speak("hello %s" % (results[0]['name']))
-				self.blink_yellow(3)
+				self.speak("hello %s" % (results[0]['name']))
+				# self.blink_yellow(3)
 				self.close_cam()
 		return
 
@@ -194,6 +194,9 @@ class Rapiro:
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
 
+	def speak(self,t):
+		speak(m)
+		self.blink_yellow(5)
 
 	def blink_yellow(self,t):
 		self.rapiro.write(ledcmd([255,255,0],t))

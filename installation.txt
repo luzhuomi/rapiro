@@ -1,1 +1,2 @@
-sudo apt-get install festival bottle
+sudo apt-get install festival
+sudo easy_install bottle serial

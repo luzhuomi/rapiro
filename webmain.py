@@ -15,12 +15,17 @@ def index(name):
 @route('/reset/')
 def reset():
     global rlock
-    global counter
     global r
     with rlock:
-        counter = counter + 1
-        r.look_for_face()
+        r.reset()
     return template('{{counter}}', counter=counter)
 
+@route('/cmd/<command>')
+def cmd(command):
+	global rlock
+	global r
+	with rlock:
+		pass
+	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
 
 run(host='0.0.0.0', port=8080)
