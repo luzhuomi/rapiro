@@ -1,2 +1,2 @@
 sudo apt-get install festival
-sudo easy_install bottle serial
+sudo easy_install bottle wolframalpha pyserial

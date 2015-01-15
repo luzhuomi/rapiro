@@ -1,6 +1,8 @@
 from bottle import route, run, template
 import threading
 import rapiro
+import wolframapi
+import urllib 
 
 r = rapiro.Rapiro()
 counter = 0
@@ -25,7 +27,18 @@ def cmd(command):
 	global rlock
 	global r
 	with rlock:
-		pass
+		query = urllib.unquote(command).decode('utf8').replace('+', ' ')
+		print "query=%s" % (query)
+		if query=="hello":
+			r.look_for_face()
+		elif query=="stop":
+			r.reset()
+		elif query=="dance":
+			r.action(9)
+		else:
+			answer = wolframapi.process(query)
+			print answer
+			r.speak(answer)
 	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
 
 run(host='0.0.0.0', port=8080)

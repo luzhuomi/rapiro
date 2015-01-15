@@ -193,10 +193,11 @@ class Rapiro:
 		self.rapiro.write("#M00")
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
+		self.close_cam()
 
-	def speak(self,t):
-		speak(m)
-		self.blink_yellow(5)
+	def speak(self,mesg):
+		speak(mesg)
+		self.blink_yellow(3)
 
 	def blink_yellow(self,t):
 		self.rapiro.write(ledcmd([255,255,0],t))
