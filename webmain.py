@@ -29,10 +29,24 @@ def cmd(command):
 	with rlock:
 		query = urllib.unquote(command).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
-		if query=="hello":
+		if query=="i am here":
 			r.look_for_face()
+		elif query=="move forward":
+			r.forward()
+		elif query=="move backword":
+			r.backward()
+		elif query=="turn to your left":
+			r.turn_left()
+		elif query=="turn to your right":
+			r.turn_right()
 		elif query=="stop":
 			r.reset()
+		elif query=="hug":
+			r.action(7)
+		elif query=="hello" or query=="hi":
+			r.action(6)
+		elif query=="bye":
+			r.action(8)
 		elif query=="dance":
 			r.action(10)
 		else:
