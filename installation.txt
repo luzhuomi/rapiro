@@ -1,2 +1,182 @@
 sudo apt-get install festival
+sudo apt-get install minicom  
+sudo apt-get install python-setuptools
 sudo easy_install bottle wolframalpha pyserial
+
+# for opencv
+sudo apt-get -y install build-essential cmake cmake-curses-gui pkg-config libpng12-0 libpng12-dev libpng++-dev libpng3 libpnglite-dev zlib1g-dbg zlib1g zlib1g-dev pngtools libtiff4-dev libtiff4 libtiffxx0c2 libtiff-tools libeigen3-dev
+
+sudo apt-get -y install libjpeg8 libjpeg8-dev libjpeg8-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec53 libavformat53 libavformat-dev libgstreamer0.10-0-dbg libgstreamer0.10-0 libgstreamer0.10-dev libxine1-ffmpeg libxine-dev libxine1-bin libunicap2 libunicap2-dev swig libv4l-0 libv4l-dev python-numpy libpython2.6 python-dev python2.6-dev libgtk2.0-dev 
+
+wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.8/opencv-2.4.8.zip/download opencv-2.4.8.zip
+
+unzip opencv-2.4.8.zip
+cd opencv-2.4.8
+mkdir release
+cd release
+ccmake ../
+
+
+press ‘c’ to configure
+once done toggle the options you want. This were mine:
+
+ANT_EXECUTABLE                   ANT_EXECUTABLE-NOTFOUND                                                                                                
+BUILD_DOCS                       ON                                                                                                                     
+BUILD_EXAMPLES                   ON                                                                                                                     
+BUILD_JASPER                     ON                                                                                                                     
+BUILD_JPEG                       ON                                                                                                                     
+BUILD_OPENEXR                    ON                                                                                                                     
+BUILD_PACKAGE                    ON                                                                                                                     
+BUILD_PERF_TESTS                 ON                                                                                                                     
+BUILD_PNG                        ON                                                                                                                     
+BUILD_SHARED_LIBS                ON                                                                                                                     
+BUILD_TBB                        OFF                                                                                                                    
+BUILD_TESTS                      ON                                                                                                                     
+BUILD_TIFF                       ON                                                                                                                     
+BUILD_WITH_DEBUG_INFO            ON                                                                                                                     
+BUILD_ZLIB                       ON                                                                                                                     
+BUILD_opencv_apps                ON                                                                                                                     
+BUILD_opencv_calib3d             ON                                                                                                                     
+BUILD_opencv_contrib             ON                                                                                                                     
+BUILD_opencv_core                ON                                                                                                                     
+BUILD_opencv_features2d          ON                                                                                                                     
+BUILD_opencv_flann               ON                                                                                                                     
+BUILD_opencv_gpu                 ON                                                                                                                     
+BUILD_opencv_highgui             ON                                                                                                                     
+BUILD_opencv_imgproc             ON                                                                                                                     
+BUILD_opencv_legacy              ON                                                                                                                     
+BUILD_opencv_ml                  ON                                                                                                                     
+BUILD_opencv_nonfree             ON                                                                                                                     
+BUILD_opencv_objdetect           ON                                                                                                                     
+BUILD_opencv_ocl                 ON                                                                                                                     
+BUILD_opencv_photo               ON                                                                                                                     
+BUILD_opencv_python              ON                                                                                                                     
+BUILD_opencv_stitching           ON                                                                                                                     
+BUILD_opencv_superres            ON                                                                                                                     
+BUILD_opencv_ts                  ON                                                                                                                     
+BUILD_opencv_video               ON                                                                                                                     
+BUILD_opencv_videostab           ON                                                                                                                     
+BUILD_opencv_world               OFF                                                                                                                    
+CLAMDBLAS_INCLUDE_DIR            CLAMDBLAS_INCLUDE_DIR-NOTFOUND                                                                                         
+CLAMDBLAS_ROOT_DIR               CLAMDBLAS_ROOT_DIR-NOTFOUND                                                                                            
+CLAMDFFT_INCLUDE_DIR             CLAMDFFT_INCLUDE_DIR-NOTFOUND                                                                                          
+CLAMDFFT_ROOT_DIR                CLAMDFFT_ROOT_DIR-NOTFOUND                                                                                             
+CMAKE_BUILD_TYPE                 Release                                                                                                                  
+CMAKE_CONFIGURATION_TYPES        Debug;Release                                                                                                                
+CMAKE_INSTALL_PREFIX             /usr/local
+ 
+CMAKE_VERBOSE                    OFF                                                                                                                    
+CUDA_BUILD_CUBIN                 OFF                                                                                                                    
+CUDA_BUILD_EMULATION             OFF                                                                                                                    
+CUDA_HOST_COMPILER               /usr/bin/gcc                                                                                                          
+CUDA_SDK_ROOT_DIR                CUDA_SDK_ROOT_DIR-NOTFOUND                                                                                             
+CUDA_SEPARABLE_COMPILATION       OFF                                                                                                                    
+CUDA_TOOLKIT_ROOT_DIR            CUDA_TOOLKIT_ROOT_DIR-NOTFOUND                                                                                         
+CUDA_VERBOSE_BUILD               OFF                                                                                                                    
+EIGEN_INCLUDE_PATH               /usr/include/eigen3                                                                                                   
+ENABLE_NEON                      OFF                                                                                                                    
+ENABLE_NOISY_WARNINGS            OFF                                                                                                                    
+ENABLE_OMIT_FRAME_POINTER        ON                                                                                                                     
+ENABLE_PRECOMPILED_HEADERS       ON                                                                                                                     
+ENABLE_PROFILING                 OFF                                                                                                                    
+ENABLE_SOLUTION_FOLDERS          OFF                                                                                                                    
+ENABLE_VFPV3                     OFF                                                                                                                    
+EXECUTABLE_OUTPUT_PATH           /home/pi/opencv-2.4.8/release/bin                                                                              
+GIGEAPI_INCLUDE_PATH             GIGEAPI_INCLUDE_PATH-NOTFOUND                                                                                          
+GIGEAPI_LIBRARIES                GIGEAPI_LIBRARIES-NOTFOUND                                                                                             
+INSTALL_CREATE_DISTRIB           OFF                                                                                                                    
+INSTALL_C_EXAMPLES               OFF                                                                                                                    
+INSTALL_PYTHON_EXAMPLES          OFF                                                                                                                    
+INSTALL_TO_MANGLED_PATHS         OFF                                                                                                                    
+OPENCV_CONFIG_FILE_INCLUDE_DIR   /home/pi/opencv/opencv-2.4.8/release                                                                                  
+OPENCV_EXTRA_MODULES_PATH                                                                                                                               
+OPENCV_WARNINGS_ARE_ERRORS       OFF                                                                                                                    
+OPENEXR_INCLUDE_PATH             OPENEXR_INCLUDE_PATH-NOTFOUND                                                                                          
+PVAPI_INCLUDE_PATH               PVAPI_INCLUDE_PATH-NOTFOUND                                                                                            
+PYTHON_NUMPY_INCLUDE_DIR         /usr/lib/pymodules/python2.7/numpy/core/include                                                                       
+PYTHON_PACKAGES_PATH             lib/python2.7/dist-packages                                                                                           
+SPHINX_BUILD                     SPHINX_BUILD-NOTFOUND                                                                                                  
+WITH_1394                        OFF                                                                                                                    
+WITH_CUBLAS                      OFF                                                                                                                    
+WITH_CUDA                        OFF                                                                                                                    
+WITH_CUFFT                       OFF                                                                                                                    
+WITH_EIGEN                       ON                                                                                                                     
+WITH_FFMPEG                      ON                                                                                                                     
+WITH_GIGEAPI                     OFF                                                                                                                    
+WITH_GSTREAMER                   ON                                                                                                                     
+WITH_GTK                         ON                                                                                                                     
+WITH_JASPER                      ON                                                                                                                     
+WITH_JPEG                        ON                                                                                                                     
+WITH_LIBV4L                      ON                                                                                                                     
+WITH_NVCUVID                     OFF  
+ 
+WITH_OPENCL                      ON                                                                                                                     
+WITH_OPENCLAMDBLAS               ON                                                                                                                     
+WITH_OPENCLAMDFFT                ON                                                                                                                     
+WITH_OPENEXR                     ON                                                                                                                     
+WITH_OPENGL                      ON                                                                                                                     
+WITH_OPENMP                      OFF                                                                                                                    
+WITH_OPENNI                      OFF                                                                                                                    
+WITH_PNG                         ON                                                                                                                     
+WITH_PVAPI                       ON                                                                                                                     
+WITH_QT                          OFF                                                                                                                    
+WITH_TBB                         OFF                                                                                                                    
+WITH_TIFF                        ON                                                                                                                     
+WITH_UNICAP                      OFF                                                                                                                    
+WITH_V4L                         ON                                                                                                                     
+WITH_XIMEA                       OFF                                                                                                                    
+WITH_XINE                        OFF       
+
+
+press ‘c’ again to configure with your new settings
+press ‘g’ to generate the Makefile
+
+And finally, build. This will take a long time (about 10 hours!).
+
+make
+sudo make install
+
+
+
+INSTALL UV4L
+
+How to install or upgrade UV4L on Raspbian (for the Raspberry Pi)
+
+To install UV4L open a terminal and type the following commands:
+$ curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
+Add the following line to the file /etc/apt/sources.list :
+deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ wheezy main
+
+$ sudo apt-get update
+$ sudo apt-get install uv4l uv4l-raspicam
+The last two commands will upgrade UV4L to the most recent version, if it's already installed.
+
+If you want the driver to be loaded at boot, also install this optional package:
+$ sudo apt-get install uv4l-raspicam-extras
+As a convenience, the above package will also provide a service script for starting or stopping the driver at any time:
+$ sudo service uv4l_raspicam restart
+When (re)starting the service, uv4l will be instructed to parse the configuration file /etc/uv4l/uv4l-raspicam.conf to get the default values for the (main) driver options. You can edit that file as you prefer to add, remove or change the default options. The same service is used at boot.
+
+Now the UV4L core component and the Video4Linux2 driver for the CSI Camera Board are installed. If you occasionally get unexpected errors from the driver, consider updating the firmware with the following command:
+$ sudo rpi-update
+For detailed informations, options, etc... about the modules installed type accordingly:
+$ man uv4l
+$ man uv4l-raspicam
+To get a list of available options:
+$ uv4l --help --driver raspicam --driver-help
+If you did not install the optional uv4l-raspicam-extras package (which already contains a script for starting uv4l with the settings taken from a configuration file) but want to quicly test uv4l, load it manually:
+$ uv4l --driver raspicam --auto-video_nr --width 640 --height 480 --encoding jpeg
+and take a JPEG snapshot from the Camera:
+$ dd if=/dev/video0 of=snapshot.jpeg bs=11M count=1
+For a list of other use cases click here.
+
+To terminate a running driver, close the applications and kill the corresponding uv4l process:
+$ pkill uv4l
+Apart from the driver for the Raspberry Pi Camera Board, the following modules or drivers can be optionally installed:
+$ sudo apt-get install uv4l-server
+$ sudo apt-get install uv4l-uvc
+$ sudo apt-get install uv4l-xscreen
+$ sudo apt-get install uv4l-mjpegstream
+For the Raspberry Pi 2 only, the WebRTC extension for the Streaming Server is also available:
+$ sudo apt-get install uv4l-webrtc
+Once you have installed the HTTP Streaming Server module, make sure to reload uv4l for it to notice and start the server. Afterwards you can access the server with the browser at the default address and port http://raspberry:8080/ (where raspberry has to be replaced with the actual hostname or IP address of your RaspberryPi.
