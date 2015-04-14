@@ -70,6 +70,7 @@ class Rapiro:
 
 	def __init__(self):
 		# version check
+		''' does not work for pi 2
 		self.rapiro.write("#V")
 		time.sleep(0.05)
 		version = ""
@@ -80,7 +81,7 @@ class Rapiro:
 		if(version != "00"):
 			print "ERROR: Firmware of Rapiro is different."
 			sys.exit(1)		
-
+		'''
 		self.current_angles = self.ANGLES
 		self.current_leds = self.LEDS
 		return

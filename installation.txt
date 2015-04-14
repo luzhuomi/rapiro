@@ -3,6 +3,14 @@ sudo apt-get install minicom
 sudo apt-get install python-setuptools
 sudo easy_install bottle wolframalpha pyserial
 
+# comment away  this line in /etc/inittab
+#Spawn a getty on Raspberry Pi serial line
+#T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
+
+# for sound
+use amixer set PCM 100% to maximize the volume
+
+
 # for opencv
 sudo apt-get -y install build-essential cmake cmake-curses-gui pkg-config libpng12-0 libpng12-dev libpng++-dev libpng3 libpnglite-dev zlib1g-dbg zlib1g zlib1g-dev pngtools libtiff4-dev libtiff4 libtiffxx0c2 libtiff-tools libeigen3-dev
 
@@ -180,3 +188,25 @@ $ sudo apt-get install uv4l-mjpegstream
 For the Raspberry Pi 2 only, the WebRTC extension for the Streaming Server is also available:
 $ sudo apt-get install uv4l-webrtc
 Once you have installed the HTTP Streaming Server module, make sure to reload uv4l for it to notice and start the server. Afterwards you can access the server with the browser at the default address and port http://raspberry:8080/ (where raspberry has to be replaced with the actual hostname or IP address of your RaspberryPi.
+
+modify /etc/uv4l/uv4l-raspicam.conf
+with the following turn on
+auto-video_nr = yes
+encoding = jpeg
+width = 640
+height = 480
+framerate = 30
+nopreview = yes
+vflip = yes
+
+# for auto start on boot
+add this in /etc/rc.local
+
+(bash /home/pi/rapiro/runatstart.sh  >> /tmp/rapiro.log 2>&1) &
+
+# for pi 2 with 8192cu wireless card
+ifdown --force wlan0
+sleep 1 && ifup wlan0
+
+
+
