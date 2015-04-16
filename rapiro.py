@@ -413,10 +413,10 @@ class Rapiro:
 	def backward(self):
 		self.rapiro.write("#M02")
 
-	def turn_right(self):
+	def turn_left(self):
 		self.rapiro.write("#M03")
 
-	def turn_left(self):
+	def turn_right(self):
 		self.rapiro.write("#M04")
 
 	def action(self,n):
