@@ -9,6 +9,8 @@ import threading
 import urllib 
 from bottle import ServerAdapter, route, run, server_names, template # easy_install bottle cherrypy pyopenssl # which requires apt-get install python-dev ffi-dev
 from socket import gethostname
+import wolframapi
+
 
 counter = 0
 rlock = threading.Lock()
@@ -22,7 +24,10 @@ def index():
 @route('/voice/<q>')
 def index(q):
 	print "query=%s" % (q)
-        return template('voice.tpl')
+	answer = wolframapi.process(q)
+	answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Lu')
+	print answer
+	return answer # template('voice.tpl')
 
 
 class SSLWebServer(ServerAdapter):
