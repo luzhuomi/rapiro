@@ -14,18 +14,18 @@
      recognition.lang = "en";
      recognition.continuous = true;
      reset();
-     recognition.onend = reset();
+     recognition.onend = function () { console.log("onend"); recognition.start(); };
      recognition.onresult = function (event) {
        for (var i = event.resultIndex; i < event.results.length; ++i) {
          if (event.results[i].isFinal) {
-           console.log(event.results[i][0].transcript);
+           // console.log(i + recognizing);
+           // console.log(event.results.length);
            q.value = event.results[i][0].transcript;
-	   $.get("/"+q.value, function(data)
+	   $.get("/voice/"+q.value, function(data)
 		{
 		    console.log(q.value);
 		});
-           // q.form.submit();
-           
+           // q.form.submit();           
          }
        }
      }

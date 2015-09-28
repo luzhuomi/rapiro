@@ -1,37 +1,56 @@
-from bottle import route, run, template
+
+# requires cherrypy3
+# installing directly via apt-get install python-cherrypy3 should be easiest
+# installing via easy_install
+# which requires apt-get install python-dev ffi-dev
+#
+
 import threading
 import urllib 
+from bottle import ServerAdapter, route, run, server_names, template # easy_install bottle cherrypy pyopenssl # which requires apt-get install python-dev ffi-dev
+from socket import gethostname
 
 counter = 0
 rlock = threading.Lock()
 
 
-
-
-@route('/reset/')
-def reset():
-    global rlock
-    global r
-    with rlock:
-        r.reset()
-    return template('{{counter}}', counter=counter)
-
-@route('/cmd/<command>')
-def cmd(command):
-	global rlock
-	with rlock:
-		query = urllib.unquote(command).decode('utf8').replace('+', ' ')
-		print "query=%s" % (query)
-	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
-
-@route('/')
+@route('/voice')
 def index():
 	return template('voice.tpl') 
 
 
-@route('/<q>')
+@route('/voice/<q>')
 def index(q):
 	print "query=%s" % (q)
         return template('voice.tpl')
 
-run(host='0.0.0.0', port=8080)
+
+class SSLWebServer(ServerAdapter):
+    """
+    CherryPy web server with SSL support.
+    """
+
+    def run(self, handler):
+        """
+        Runs a CherryPy Server using the SSL certificate.
+        """
+        from cherrypy import wsgiserver
+        from cherrypy.wsgiserver.ssl_pyopenssl import pyOpenSSLAdapter
+
+        server = wsgiserver.CherryPyWSGIServer((self.host, self.port), handler)
+
+        server.ssl_adapter = pyOpenSSLAdapter(
+            certificate="openssl/certificate.crt",
+            private_key="openssl/privateKey.key"#,
+            #certificate_chain="intermediate_cert.crt"
+        )
+
+        try:
+            server.start()
+        except Exception,e:
+	    print "failed to start %s" % (str(e))
+            server.stop()
+
+server_names['sslwebserver'] = SSLWebServer
+
+run(host='0.0.0.0', port=8080, server='sslwebserver')
