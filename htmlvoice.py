@@ -7,7 +7,7 @@
 
 import threading
 import urllib 
-from bottle import ServerAdapter, route, run, server_names, template # easy_install bottle cherrypy pyopenssl # which requires apt-get install python-dev ffi-dev
+from bottle import ServerAdapter, route, run, server_names, template, static_file # easy_install bottle cherrypy pyopenssl # which requires apt-get install python-dev ffi-dev
 from socket import gethostname
 import wolframapi
 
@@ -28,6 +28,12 @@ def index(q):
 	answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Lu')
 	print answer
 	return answer # template('voice.tpl')
+
+
+@route('/static/<path:path>')
+def callback(path):
+    return static_file(path, root='/home/pi/git/rapiro/static/')
+
 
 
 class SSLWebServer(ServerAdapter):

@@ -1,6 +1,6 @@
 <html>
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="/static/jquery-2.1.4.min.js"></script>
 </head>
 <body>
      <form action="/create">
@@ -15,7 +15,7 @@
      recognition.lang = "en";
      recognition.continuous = true;
      reset();
-     recognition.onend = function () { console.log("onend"); recognition.start(); };
+     recognition.onend = function () { reset(); }; //  console.log("onend"); recognition.start(); };
      recognition.onresult = function (event) {
        for (var i = event.resultIndex; i < event.results.length; ++i) {
          if (event.results[i].isFinal) {
@@ -55,14 +55,14 @@
     msg.pitch = 1; //0 to 2
     msg.lang = 'en-US';
 
-     function speak(mesg)
+   function speak(mesg)
      {
       msg.text = mesg;      
       speechSynthesis.speak(msg);
       $("#answer").text(mesg);
      }     
-     $(document).ready(function() 
-     	{ 
+   $(document).ready(function() 
+   	{ 
     		toggleStartStop();
     	});
 
