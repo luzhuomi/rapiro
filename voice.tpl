@@ -6,6 +6,7 @@
      <form action="/create">
        <input type="search" id="q" name="q" size=60>
      </form>
+     <div><span id="answer"></span></div>
      <button id="button" onclick="toggleStartStop()"></button>
 
      <script type="text/javascript">
@@ -23,6 +24,7 @@
 	   $.get("/"+q.value, function(data)
 		{
 		    console.log(q.value);
+        speak(data);
 		});
            // q.form.submit();
            
@@ -43,11 +45,28 @@
          button.innerHTML = "Click to Stop";
        }
      }
+
+    var msg = new SpeechSynthesisUtterance();
+    var voices = window.speechSynthesis.getVoices();
+    msg.voice = voices[2]; // Note: some voices don't support altering params
+    msg.voiceURI = 'native';
+    msg.volume = 1; // 0 to 1
+    msg.rate = 0.7; // 0.1 to 10
+    msg.pitch = 1; //0 to 2
+    msg.lang = 'en-US';
+
+     function speak(mesg)
+     {
+      msg.text = mesg;      
+      speechSynthesis.speak(msg);
+      $("#answer").text(mesg);
+     }     
      $(document).ready(function() 
- 	{ 
-		toggleStartStop();
-		console.log("hello");
-	});
+     	{ 
+    		toggleStartStop();
+    	});
+
+
      </script>
 </body>
 </html>

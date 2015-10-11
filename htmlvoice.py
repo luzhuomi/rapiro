@@ -1,6 +1,8 @@
 from bottle import route, run, template
 import threading
 import urllib 
+import wolframapi
+
 
 counter = 0
 rlock = threading.Lock()
@@ -22,6 +24,7 @@ def cmd(command):
 	with rlock:
 		query = urllib.unquote(command).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
+		print answer		
 	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
 
 @route('/')
@@ -32,6 +35,9 @@ def index():
 @route('/<q>')
 def index(q):
 	print "query=%s" % (q)
-        return template('voice.tpl')
+	answer = wolframapi.process(q)
+	answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Lu')
+	print answer
+	return answer # template('voice.tpl')
 
 run(host='0.0.0.0', port=8080)
