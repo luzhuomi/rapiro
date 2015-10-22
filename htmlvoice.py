@@ -2,8 +2,8 @@
 # requires cherrypy3
 # installing directly via apt-get install python-cherrypy3 should be easiest
 # installing via easy_install
-# which requires apt-get install python-dev ffi-dev
-#
+# which requires apt-get install python-dev libffi-dev
+# easy_install pyOpenSSL
 
 import threading
 import urllib 
