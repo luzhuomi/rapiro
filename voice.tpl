@@ -15,7 +15,7 @@
      recognition.lang = "en";
      recognition.continuous = true;
      reset();
-     recognition.onend = function () { reset(); }; //  console.log("onend"); recognition.start(); };
+     recognition.onend = function () { console.log("onend"); recognition.start(); };
      recognition.onresult = function (event) {
        for (var i = event.resultIndex; i < event.results.length; ++i) {
          if (event.results[i].isFinal) {
