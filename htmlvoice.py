@@ -1,6 +1,6 @@
 
 # requires cherrypy3
-# installing directly via apt-get install python-cherrypy3 should be easiest
+# installing directly via apt-get install python-cherrypy3 should be easiest, note the apt-get way of getting cherrypy3 will yield a ssl problem
 # installing via easy_install
 # which requires apt-get install python-dev libffi-dev
 # easy_install pyOpenSSL
