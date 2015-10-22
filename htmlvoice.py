@@ -7,10 +7,13 @@
 
 import threading
 import urllib 
-from bottle import ServerAdapter, route, run, server_names, template, static_file # easy_install bottle cherrypy pyopenssl # which requires apt-get install python-dev ffi-dev
+from bottle import ServerAdapter, route, run, server_names, template, static_file # easy_install bottle cherrypy pyopenssl 
+# which requires apt-get install python-dev ffi-dev
+
 from socket import gethostname
 import wolframapi
 
+from text2speech import speak
 
 counter = 0
 rlock = threading.Lock()
@@ -24,9 +27,14 @@ def index():
 @route('/voice/<q>')
 def index(q):
 	print "query=%s" % (q)
-	answer = wolframapi.process(q)
-	answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Lu')
-	print answer
+	answer = ''
+	words = q.split()
+	if 'Henry' in words:
+		q2 = ' '.join(filter(lambda x:x!='Henry', words))
+		answer = wolframapi.process(q2)
+		answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Jarvis')
+		print answer
+		speak(answer)
 	return answer # template('voice.tpl')
 
 
