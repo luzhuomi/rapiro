@@ -29,8 +29,8 @@ def index(q):
 	print "query=%s" % (q)
 	answer = ''
 	words = q.split()
-	if 'Jarvis' in words:
-		q2 = ' '.join(filter(lambda x:x!='Jarvis', words))
+	if 'Henry' in words:
+		q2 = ' '.join(filter(lambda x:x!='Henry', words))
 		answer = wolframapi.process(q2)
 		answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Jarvis')
 		print answer
