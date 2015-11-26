@@ -191,7 +191,10 @@ class Rapiro:
 		self.speak("Say cheese!")
 		filename = "IMG" + datetime.datetime.now().isoformat() + ".jpg"
 		camera = picamera.PiCamera() 
+		camera.resolution = (1280, 720)
+		camera.iso = 800
 		camera.vflip = True
+		camera.hflip = True
 		camera.capture(filename)
 		camera.close()
 
