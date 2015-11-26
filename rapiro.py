@@ -82,8 +82,8 @@ class Rapiro:
 			print "ERROR: Firmware of Rapiro is different."
 			sys.exit(1)		
 		'''
-		self.current_angles = self.ANGLES
-		self.current_leds = self.LEDS
+		self.current_angles = [ x for x in self.ANGLES ]
+		self.current_leds = [ x for x in self.LEDS ] 
 		return
 
 
@@ -200,8 +200,8 @@ class Rapiro:
 		#	self.rapiro.write(mkcmd(i,self.ANGLES[i],1))
 		#	time.sleep(0.05)
 		self.rapiro.write("#M00")
-		self.current_angles = self.ANGLES
-		self.current_leds = self.LEDS
+		self.current_angles = [ x for x in self.ANGLES ]
+		self.current_leds = [ x for x in self.LEDS ] 
 		self.close_cam()
 
 	def speak(self,mesg):
