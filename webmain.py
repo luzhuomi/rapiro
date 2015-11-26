@@ -31,6 +31,8 @@ def cmd(command):
 		print "query=%s" % (query)
 		if query.lower()=="i am here":
 			r.look_for_face()
+		if query.lower()=="take a picture":
+			r.picture()			
 		elif query=="move forward":
 			r.forward()
 		elif query=="move backword":

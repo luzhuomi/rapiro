@@ -185,7 +185,14 @@ class Rapiro:
 				self.close_cam()
 		return
 
-
+	def picture(self):
+		import picamera
+		import datetime
+		filename = "IMG" + datetime.datetime.now().isoformat() + ".jpg"
+		camera = picamera.PiCamera() 
+		camera.vflip = True
+		camera.capture(filename)
+		camera.close()
 
 	def reset(self):
 		#for i in range(0,12):
