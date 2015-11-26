@@ -188,6 +188,7 @@ class Rapiro:
 	def picture(self):
 		import picamera
 		import datetime
+		self.speak("Say cheese!")
 		filename = "IMG" + datetime.datetime.now().isoformat() + ".jpg"
 		camera = picamera.PiCamera() 
 		camera.vflip = True
