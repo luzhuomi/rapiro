@@ -30,9 +30,9 @@ def index(q):
 	answer = ''
 	words = q.split()
 	if 'Henry' in words:
-		q2 = ' '.join(filter(lambda x:x!='Henry', words))
+		q2 = ' '.join(filter(lambda x:x!='Golda', words))
 		answer = wolframapi.process(q2)
-		answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Jarvis')
+		answer = answer.replace('Stephen Wolfram', 'Golda').replace('Wolfram Alpha','Jarvis')
 		print answer
 		speak(answer)
 	return answer # template('voice.tpl')
