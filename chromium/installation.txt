@@ -1,0 +1,17 @@
+add the following to /etc/apt/source.list
+
+deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi
+
+download chromium
+
+
+
+wget http://ports.ubuntu.com/pool/universe/c/chromium-browser/chromium-browser_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
+wget http://ports.ubuntu.com/pool/universe/c/chromium-browser/chromium-browser-l10n_45.0.2454.101-0ubuntu0.14.04.1.1099_all.deb
+wget http://ports.ubuntu.com/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg-dbg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
+wget http://ports.ubuntu.com/pool/universe/c/chromium-browser/chromium-codecs-ffmpeg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
+
+sudo dpkg -i chromium-codecs-ffmpeg-dbg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb chromium-codecs-ffmpeg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
+sudo dpkg -i chromium-browser_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb chromium-browser-l10n_45.0.2454.101-0ubuntu0.14.04.1.1099_all.deb
+
+
