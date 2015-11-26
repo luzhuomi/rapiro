@@ -1,6 +1,7 @@
 sudo apt-get install festival
 sudo apt-get install minicom  
 sudo apt-get install python-setuptools
+sudo apt-get install python-picamera
 sudo easy_install bottle wolframalpha pyserial
 sudo easy_install pip
 sudo pip install pyopencv
