@@ -31,7 +31,7 @@ def index():
 @route('/voice/<q>')
 def index(q):
 	words = q.split()
-	if (len(words) >0) and ('Gordon' == words[0]):
+	if (len(words) >0) and ('ryan' == words[0].lower()):
 		q2 = ' '.join(words[1:])
 		query = urllib.unquote(q2).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
@@ -61,7 +61,7 @@ def index(q):
 		#	r.action(10)
 		else:
 			answer = wolframapi.process(query)
-			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Gordon')
+			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Ryan')
 			print answer
 			r.speak(answer)
 
