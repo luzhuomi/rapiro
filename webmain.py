@@ -29,7 +29,7 @@ def cmd(command):
 	with rlock:
 		query = urllib.unquote(command).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
-		if query.lower()=="i am here":
+		if query.lower()=="look at me":
 			r.look_for_face()
 		if query.lower()=="take a picture":
 			r.picture()			
@@ -47,15 +47,15 @@ def cmd(command):
 			r.action(6)
 		elif query=="hug":
 			r.action(7)
-		elif query=="bye":
+		elif query=="bye" or query == "bye bye":
 			r.action(8)
 		elif query=="hold this for me":
 			r.action(9)
-		elif query=="dance":
-			r.action(10)
+		#elif query=="dance": // too dangerous
+		#	r.action(10)
 		else:
 			answer = wolframapi.process(query)
-			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Golda')
+			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Gordon')
 			print answer
 			r.speak(answer)
 	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
