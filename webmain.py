@@ -55,7 +55,7 @@ def cmd(command):
 			r.action(10)
 		else:
 			answer = wolframapi.process(query)
-			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Lu')
+			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Golda')
 			print answer
 			r.speak(answer)
 	return template('{ "command" : {{command}},  "status": "ok" }', command=command)
