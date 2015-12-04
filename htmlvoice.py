@@ -14,6 +14,7 @@ from socket import gethostname
 import wolframapi
 
 from text2speech import speak
+import rapiro
 
 r = rapiro.Rapiro()
 
