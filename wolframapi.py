@@ -1,9 +1,13 @@
 import wolframalpha
 import sys
+import ConfigParser # easy_install configparser
 
 # Get a free API key here http://products.wolframalpha.com/api/
 # This is a fake ID, go and get your own, instructions on my blog.
-app_id='A4PG2A-XG2T3YJP3G'
+
+config = ConfigParser.ConfigParser()
+config.read('/boot/rapiro.conf')
+app_id = config.get('WOLFRAMALPHA','app_id')
 
 client = wolframalpha.Client(app_id)
 
