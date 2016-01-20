@@ -431,7 +431,7 @@ class Rapiro:
 		self.rapiro.write("#M04")
 
 	def action(self,n):
-		self.rapiro.write("#M"+mkstr(n,2))
+		self.rapiro.write("#M"+mkstr(n,1))
 
 
 # image retrain
