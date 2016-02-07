@@ -202,7 +202,7 @@ class Rapiro:
 		#for i in range(0,12):
 		#	self.rapiro.write(mkcmd(i,self.ANGLES[i],1))
 		#	time.sleep(0.05)
-		self.rapiro.write("#M00")
+		self.rapiro.write("#M0")
 		self.current_angles = [ x for x in self.ANGLES ]
 		self.current_leds = [ x for x in self.LEDS ] 
 		self.close_cam()
@@ -419,16 +419,16 @@ class Rapiro:
 
 
 	def forward(self):
-		self.rapiro.write("#M01")
+		self.rapiro.write("#M1")
 
 	def backward(self):
-		self.rapiro.write("#M02")
+		self.rapiro.write("#M2")
 
 	def turn_left(self):
-		self.rapiro.write("#M03")
+		self.rapiro.write("#M3")
 
 	def turn_right(self):
-		self.rapiro.write("#M04")
+		self.rapiro.write("#M4")
 
 	def action(self,n):
 		self.rapiro.write("#M"+mkstr(n,1))
