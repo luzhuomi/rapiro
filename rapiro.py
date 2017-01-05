@@ -29,7 +29,8 @@ class Rapiro:
 
 	# config
 	SENSOR_PIN = 6
-	RAPIRO_TTY = '/dev/ttyAMA0'
+	RAPIRO_TTY = '/dev/ttyS0' 
+	# for pi 2 wheezy '/dev/ttyAMA0'
 	rapiro = serial.Serial(RAPIRO_TTY, 57600, timeout = 10)
 
 	# servo IDs

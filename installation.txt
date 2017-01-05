@@ -4,7 +4,8 @@ sudo apt-get install python-setuptools
 sudo apt-get install python-picamera
 sudo easy_install bottle wolframalpha pyserial
 sudo easy_install pip
-sudo pip install pyopencv
+# not needed in pi 3? 
+# sudo pip install pyopencv 
 
 
 # comment away  this line in /etc/inittab

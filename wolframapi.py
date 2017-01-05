@@ -14,9 +14,10 @@ client = wolframalpha.Client(app_id)
 def process(query):
 	res = client.query(query)
 
-	if len(res.pods) > 0:
+
+	if len(list(res.pods)) > 0:
     		texts = ""
-    		pod = res.pods[1]
+    		pod = list(res.pods)[1]
     		if pod.text:
         		texts = pod.text
     		else:
