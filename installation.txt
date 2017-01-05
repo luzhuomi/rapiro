@@ -11,12 +11,25 @@ sudo pip install pyopencv
 #Spawn a getty on Raspberry Pi serial line
 #T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
 
+# for raspberry pi 3 jessie post 2016-11-xx 
+$ sudo nano /boot/config.txt
+and add the line (at the bottom):
+enable_uart=1
+$ sudo systemctl stop serial-getty@ttyS0.service
+$ sudo systemctl disable serial-getty@ttyS0.service
+$ sudo nano /boot/cmdline.txt
+you will see something like:
+
+dwc_otg.lpm_enable=0 console=serial0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline fsck.repair=yes root wait
+
+remove the line: console=serial0,115200 and save and reboot for changes to take effect.
+
 # for sound
 use amixer set PCM 100% to maximize the volume
 
 
 # for opencv
-sudo apt-get -y install build-essential cmake cmake-curses-gui pkg-config libpng12-0 libpng12-dev libpng++-dev libpng3 libpnglite-dev zlib1g-dbg zlib1g zlib1g-dev pngtools libtiff4-dev libtiff4 libtiffxx0c2 libtiff-tools libeigen3-dev
+sudo apt-get -y install build-essential cmake cmake-curses-gui pkg-config libpng12-0 libpng12-dev libpng++-dev libpng3 libpnglite-dev zlib1g-dbg zlib1g zlib1g-dev pngtools libtiff5-dev libtiff5 libtiffxx0c2 libtiff-tools libeigen3-dev
 
 sudo apt-get -y install libjpeg8 libjpeg8-dev libjpeg8-dbg libjpeg-progs ffmpeg libavcodec-dev libavcodec53 libavformat53 libavformat-dev libgstreamer0.10-0-dbg libgstreamer0.10-0 libgstreamer0.10-dev libxine1-ffmpeg libxine-dev libxine1-bin libunicap2 libunicap2-dev swig libv4l-0 libv4l-dev python-numpy libpython2.6 python-dev python2.6-dev libgtk2.0-dev 
 
