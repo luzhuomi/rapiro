@@ -51,6 +51,8 @@ def cmd(command):
 			r.action(8)
 		elif query=="hold this for me":
 			r.action(9)
+		elif query=="shutdown" or query=="shut down":
+			r.shutdown(9)
 		#elif query=="dance": // too dangerous
 		#	r.action(10)
 		else:

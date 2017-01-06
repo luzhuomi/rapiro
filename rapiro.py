@@ -431,6 +431,14 @@ class Rapiro:
 	def turn_right(self):
 		self.rapiro.write("#M4")
 
+	def shutdown(self):
+		self.speak("Shutting down... Good night.")
+		import subprocess
+		bashCommand = "halt"
+		process = subprocess.Popen(bashCommand.split(),stdout=subprocess.PIPE)
+		output = process.communicate()[0]
+		# print output
+
 	def action(self,n):
 		self.rapiro.write("#M"+mkstr(n,1))
 
