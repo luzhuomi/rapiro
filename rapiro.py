@@ -433,6 +433,7 @@ class Rapiro:
 
 	def shutdown(self):
 		self.speak("Shutting down... Good night.")
+		time.sleep(2)
 		import subprocess
 		bashCommand = "halt"
 		process = subprocess.Popen(bashCommand.split(),stdout=subprocess.PIPE)
