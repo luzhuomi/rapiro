@@ -31,6 +31,8 @@ def index():
 @route('/voice/<q>')
 def index(q):
 	words = q.split()
+	if (len(words) >0) and ('' == words[0]): 
+		words = words[1:]
 	if (len(words) >0) and ('ryan' == words[0].lower()):
 		q2 = ' '.join(words[1:])
 		query = urllib.unquote(q2).decode('utf8').replace('+', ' ')
