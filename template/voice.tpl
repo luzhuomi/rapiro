@@ -28,7 +28,6 @@ recognition.onresult = function (event) {
         console.log(q.value);
         console.log(data);
         speak(data);
-        window.location.href = "/prompt"
       });
       // q.form.submit(); 
     }
@@ -54,7 +53,7 @@ var voices = window.speechSynthesis.getVoices();
 msg.voice = voices[2]; // Note: some voices don't support altering params
 msg.voiceURI = 'native';
 msg.volume = 1; // 0 to 1
-msg.rate = 0.7; // 0.1 to 10
+msg.rate = 0.618; // 0.1 to 10
 msg.pitch = 1; //0 to 2
 msg.lang = 'en-US';
 
@@ -62,7 +61,8 @@ function speak(mesg)
 {
   msg.text = mesg; 
   speechSynthesis.speak(msg);
-  $("#answer").text(mesg);
+  speechSynthesis.onend( function() { window.location.href = "/prompt"; } );
+  // $("#answer").text(mesg);
 }
 $(document).ready(function() 
 { 

@@ -25,9 +25,6 @@ recognition.onresult = function (event) {
       {
         console.log(q.value);
         speak("Yes?");
-        setTimeout(function() {
-          window.location.href = "/voice"        
-        }, 500);
       }
     }
   }
@@ -61,6 +58,7 @@ function speak(mesg)
   msg.text = mesg; 
   speechSynthesis.speak(msg);
   // $("#answer").text(mesg);
+  speechSynthesis.onend( function() { window.location.href = "/voice"; } );
 }
 $(document).ready(function() 
 { 
