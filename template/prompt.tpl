@@ -26,7 +26,7 @@ recognition.onresult = function (event) {
         console.log(q.value);
         speak("Yes?");
         setTimeout(function() {
-          window.location.href = "https://127.0.0.1:8080/voice"        
+          window.location.href = "/voice"        
         }, 500);
       }
     }

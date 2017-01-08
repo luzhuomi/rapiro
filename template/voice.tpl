@@ -28,7 +28,7 @@ recognition.onresult = function (event) {
         console.log(q.value);
         console.log(data);
         speak(data);
-        window.location.href = "https://127.0.0.1:8080/prompt"
+        window.location.href = "/prompt"
       });
       // q.form.submit(); 
     }
