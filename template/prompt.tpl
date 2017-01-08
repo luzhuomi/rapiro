@@ -11,7 +11,7 @@
      <button id="button" onclick="toggleStartStop()"></button>
 
      <script type="text/javascript">
-var recognizing;
+var recognizing = true;
 var recognition = new webkitSpeechRecognition();
 recognition.lang = "en";
 recognition.continuous = true;
@@ -64,7 +64,8 @@ function speak(mesg)
 }
 $(document).ready(function() 
 { 
-  toggleStartStop();
+  // toggleStartStop();
+  recognition.stop()
 });
      </script>
 </body>
