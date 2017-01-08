@@ -34,7 +34,7 @@ def index():
 
 @route('/voice/<q>')
 def index(q):
-	anwer = "Ok"
+	answer = "Ok"
 	words = q.split()
 	if (len(words) >0) and ('' == words[0]): 
 		words = words[1:]
