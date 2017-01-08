@@ -58,7 +58,7 @@ function speak(mesg)
   msg.text = mesg; 
   speechSynthesis.speak(msg);
   // $("#answer").text(mesg);
-  speechSynthesis.onend( function() { window.location.href = "/voice"; } );
+  msg.onend( function() { window.location.href = "/voice"; } );
 }
 $(document).ready(function() 
 { 
