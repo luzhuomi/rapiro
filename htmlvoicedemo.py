@@ -11,17 +11,16 @@ from bottle import ServerAdapter, route, run, server_names, template, static_fil
 # which requires apt-get install python-dev ffi-dev
 
 from socket import gethostname
-import wolframapi
+# import wolframapi
 
 from text2speech import speak
-import rapiro
+# import rapiro
 
-r = rapiro.Rapiro()
+# r = rapiro.Rapiro()
 
 
 counter = 0
 rlock = threading.Lock()
-
 
 @route('/prompt')
 def prompt():
@@ -34,12 +33,12 @@ def index():
 
 @route('/voice/<q>')
 def index(q):
-	anwer = "Ok"
+	answer = "Ok"
+	return answer
+	"""
 	words = q.split()
-	if (len(words) >0) and ('' == words[0]): 
-		words = words[1:]
-	if (len(words) >0): # and ('ryan' == words[0].lower()):
-		q2 = q #' '.join(words[1:])
+	if (len(words) >0) and ('ryan' == words[0].lower()):
+		q2 = ' '.join(words[1:])
 		query = urllib.unquote(q2).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
 		if query.lower()=="look at me":
@@ -54,26 +53,24 @@ def index(q):
 			r.turn_left()
 		elif query=="turn to your right":
 			r.turn_right()
-		elif query=="stop" or query=="reset":
+		elif query=="stop":
 			r.reset()
 		elif query=="hello" or query=="hi":
 			r.action(6)
 		elif query=="hug":
 			r.action(7)
-		elif query=="bye" or query=="bye bye" or query=="byebye":
+		elif query=="bye":
 			r.action(8)
 		elif query=="hold this for me":
 			r.action(9)
-		elif query=="shutdown":
-			r.shutdown()
 		#elif query=="dance": # too dangerous
 		#	r.action(10)
 		else:
 			answer = wolframapi.process(query)
 			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Ryan')
-			# print answer
-			# r.speak(answer)
-	return answer
+			print answer
+			r.speak(answer)
+	"""
 
 @route('/static/<path:path>')
 def callback(path):
