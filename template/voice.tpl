@@ -66,7 +66,7 @@ function speak(mesg)
 }
 $(document).ready(function() 
 { 
-  // toggleStartStop();
+  toggleStartStop();
   recognition.stop()
 });
      </script>
