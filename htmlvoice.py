@@ -47,16 +47,18 @@ def index(q):
 			r.turn_left()
 		elif query=="turn to your right":
 			r.turn_right()
-		elif query=="stop":
+		elif query=="stop" or query=="reset":
 			r.reset()
 		elif query=="hello" or query=="hi":
 			r.action(6)
 		elif query=="hug":
 			r.action(7)
-		elif query=="bye":
+		elif query=="bye" or query=="bye bye" or query=="byebye":
 			r.action(8)
 		elif query=="hold this for me":
 			r.action(9)
+		elif query=="shutdown":
+			r.shutdown()
 		#elif query=="dance": # too dangerous
 		#	r.action(10)
 		else:
