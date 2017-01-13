@@ -64,7 +64,7 @@ function speak(mesg)
   // msg.text = mesg; 
   // speechSynthesis.speak(msg);
   // msg.onend = function() { window.location.href = "/prompt"; } ;
-  window.location.href = "/prompt"; }
+  window.location.href = "/prompt"; 
 }
 $(document).ready(function() 
 { 
