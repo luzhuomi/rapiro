@@ -59,11 +59,12 @@ msg.lang = 'en-US';
 
 function speak(mesg)
 {
-  msg.text = mesg; 
   // TODO: fixed on raspberry pi vnc chromium, if using mac it works. Now we use espeak in python
+
+  // msg.text = mesg; 
   // speechSynthesis.speak(msg);
-  msg.onend = function() { window.location.href = "/prompt"; } ;
-  // $("#answer").text(mesg);
+  // msg.onend = function() { window.location.href = "/prompt"; } ;
+  window.location.href = "/prompt"; }
 }
 $(document).ready(function() 
 { 
