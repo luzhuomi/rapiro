@@ -1,4 +1,6 @@
-sudo apt-get install festival
+sudo apt-get install festival festlex-cmu festlex-poslex festlex-oald libestools1.2 unzip festival-freebsoft-utils
+sudo apt-get install festvox-don festvox-rablpc16k festvox-kallpc16k festvox-kdlpc16k
+sudo apt-get install flite
 sudo apt-get install minicom  
 sudo apt-get install python-setuptools
 sudo apt-get install python-picamera
