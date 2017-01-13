@@ -54,7 +54,7 @@ msg.pitch = 1; //0 to 2
 msg.lang = 'en-US';
 
 function speak(mesg)
-{
+{ // TODO: fixed on raspberry pi vnc chromium, if using mac it works. Now we use espeak in python
   msg.text = mesg; 
   speechSynthesis.speak(msg);
   // $("#answer").text(mesg);

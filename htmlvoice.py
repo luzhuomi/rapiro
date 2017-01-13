@@ -29,6 +29,7 @@ def prompt():
 
 @route('/voice')
 def index():
+	r.speak("Yes")
 	return template('template/voice.tpl') 
 
 
@@ -72,7 +73,7 @@ def index(q):
 			answer = wolframapi.process(query)
 			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Ryan')
 			# print answer
-			# r.speak(answer)
+	r.speak(answer)
 	return answer
 
 @route('/static/<path:path>')
