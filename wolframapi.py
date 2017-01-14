@@ -15,7 +15,7 @@ def process(query):
 	res = client.query(query)
 
 
-	if len(list(res.pods)) > 0:
+	if hasattr(res,"pods") && len(list(res.pods)) > 0:
     		texts = ""
     		pod = list(res.pods)[1]
     		if pod.text:
