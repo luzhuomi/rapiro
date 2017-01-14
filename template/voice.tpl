@@ -23,7 +23,7 @@ recognition.onresult = function (event) {
       // console.log(i + recognizing);
       // console.log(event.results.length);
       q.value = event.results[i][0].transcript;
-      $.get("/voice/"+q.value, function(data)
+      $.get("/voice/"+q.value.trim(), function(data)
       {
         console.log(q.value);
         console.log(data);

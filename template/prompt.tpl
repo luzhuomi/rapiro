@@ -21,9 +21,10 @@ recognition.onresult = function (event) {
   for (var i = event.resultIndex; i < event.results.length; ++i) {
     if (event.results[i].isFinal) {
       q.value = event.results[i][0].transcript;
-      if (q.value.toLowerCase() == "ryan") 
+      prompt = q.value.trim()
+      if (prompt.toLowerCase() == "ryan") 
       {
-        console.log(q.value);
+        console.log(prompt);
         speak("Yes?");
       }
     }
