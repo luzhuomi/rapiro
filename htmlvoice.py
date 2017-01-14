@@ -44,26 +44,37 @@ def index(q):
 		query = urllib.unquote(q2).decode('utf8').replace('+', ' ')
 		print "query=%s" % (query)
 		if query.lower()=="look at me":
+			r.speak(answer)
 			r.look_for_face()
 		if query.lower()=="take a picture":
+			r.speak(answer)
 			r.picture()			
 		elif query=="move forward":
+			r.speak(answer)
 			r.forward()
 		elif query=="move backword":
+			r.speak(answer)
 			r.backward()
 		elif query=="turn to your left":
+			r.speak(answer)
 			r.turn_left()
 		elif query=="turn to your right":
+			r.speak(answer)
 			r.turn_right()
 		elif query=="stop" or query=="reset":
+			r.speak(answer)
 			r.reset()
 		elif query=="hello" or query=="hi":
+			r.speak(answer)
 			r.action(6)
 		elif query=="hug":
+			r.speak(answer)
 			r.action(7)
 		elif query=="bye" or query=="bye bye" or query=="byebye":
+			r.speak(answer)
 			r.action(8)
 		elif query=="hold this for me":
+			r.speak(answer)
 			r.action(9)
 		elif query=="shutdown":
 			r.shutdown()
@@ -73,7 +84,7 @@ def index(q):
 			answer = wolframapi.process(query)
 			answer = answer.replace('Stephen Wolfram', 'Kenny Lu').replace('Wolfram Alpha','Rapiro Ryan')
 			# print answer
-	r.speak(answer)
+			r.speak(answer)
 	return answer
 
 @route('/static/<path:path>')
