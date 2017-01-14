@@ -1,4 +1,5 @@
 #!/bin/bash
+env HOME=/home/pi
 vncserver -kill :1
 vncserver 
 cd /home/pi/rapiro/
