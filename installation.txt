@@ -1,20 +1,21 @@
-sudo apt-get install festival festlex-cmu festlex-poslex festlex-oald libestools1.2 unzip festival-freebsoft-utils
-sudo apt-get install festvox-don festvox-rablpc16k festvox-kallpc16k festvox-kdlpc16k
-sudo apt-get install flite
-sudo apt-get install minicom  
-sudo apt-get install python-setuptools
-sudo apt-get install python-picamera
-sudo easy_install bottle wolframalpha pyserial
+# sudo apt-get install festival festlex-cmu festlex-poslex festlex-oald libestools1.2 unzip festival-freebsoft-utils
+# sudo apt-get install festvox-don festvox-rablpc16k festvox-kallpc16k festvox-kdlpc16k
+sudo apt-get install -y flite
+sudo apt-get install -y minicom  
+sudo apt-get install -y python-setuptools
+sudo apt-get install -y python-picamera
+sudo easy_install bottle wolframalpha pyserial cherrypi dateutils
 sudo easy_install pip
 # not needed in pi 3? 
 # sudo pip install pyopencv 
 
 
+# for raspberry pi 1
 # comment away  this line in /etc/inittab
 #Spawn a getty on Raspberry Pi serial line
 #T0:23:respawn:/sbin/getty -L ttyAMA0 115200 vt100
 
-# for raspberry pi 3 jessie post 2016-11-xx 
+# for raspberry pi 2/3 jessie post 2016-11-xx 
 $ sudo nano /boot/config.txt
 and add the line (at the bottom):
 enable_uart=1
@@ -41,10 +42,10 @@ sudo apt-get -y install libjpeg8 libjpeg8-dev libjpeg8-dbg libjpeg-progs ffmpeg 
 sudo apt-get -y install libjpeg8 libjpeg8-dev libjpeg8-dbg libjpeg-progs libav-tools libavformat56 libavformat-dev libgstreamer0.10-0-dbg libgstreamer0.10-0 libgstreamer0.10-dev libxine2-ffmpeg libxine2-dev libxine2-bin libunicap2 libunicap2-dev swig libv4l-0 libv4l-dev python-numpy libpython2.7 python-dev python2.7-dev libgtk2.0-dev 
 
 
-wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.8/opencv-2.4.8.zip/download opencv-2.4.8.zip
+wget http://sourceforge.net/projects/opencvlibrary/files/opencv-unix/2.4.9/opencv-2.4.9.zip/download opencv-2.4.9.zip
 
-unzip opencv-2.4.8.zip
-cd opencv-2.4.8
+unzip opencv-2.4.9.zip
+cd opencv-2.4.9
 mkdir release
 cd release
 ccmake ../
@@ -178,7 +179,7 @@ How to install or upgrade UV4L on Raspbian (for the Raspberry Pi)
 To install UV4L open a terminal and type the following commands:
 $ curl http://www.linux-projects.org/listing/uv4l_repo/lrkey.asc | sudo apt-key add -
 Add the following line to the file /etc/apt/sources.list :
-deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ wheezy main
+deb http://www.linux-projects.org/listing/uv4l_repo/raspbian/ jessie main
 
 $ sudo apt-get update
 $ sudo apt-get install uv4l uv4l-raspicam
@@ -232,6 +233,33 @@ add this in /etc/rc.local
 # for pi 2 with 8192cu wireless card
 ifdown --force wlan0
 sleep 1 && ifup wlan0
+
+
+# vncserver
+sudo apt-get install -y tightvncserver 
+refer to vncserver/vncserver-atboot.txt
+
+# install chromium
+apt-get install chromium-browser
+
+# link rapiro.conf
+get an wolfram alpha ID
+sudo vim /boot/rapiro.conf
+
+add the following
+[WOLFRAMALPHA]
+app_id=<YOURID>
+
+ln -svnf /boot/rapiro.conf /home/pi/git/rapiro/rapiro.conf
+
+
+# disable hdmi at boot
+# it will be very useful to disable hdmi at boot after connecting the pi to Rapiro. It is headless anyway. 
+# it reduces power consumption hence increases stability.
+
+# add the following to /etc/rc.local , before any other command 
+/opt/vc/bin/tvservice -o
+
 
 
 

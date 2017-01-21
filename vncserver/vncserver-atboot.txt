@@ -11,7 +11,7 @@
 PATH="$PATH:/usr/X11R6/bin/"
 
 # The Username:Group that will run VNC
-export USER="luzm"
+export USER="pi"
 #${RUNAS}
 
 # The display that VNC will use
@@ -54,3 +54,18 @@ exit 0
 
 2. sudo chmod +x /etc/init.d/vncserver
 3. sudo update-rc.d vncserver defaults
+4. start vncserver once
+$ vncserver
+$ vncserver -kill :1
+5 modify the xstarter in /home/pi/.vnc
+#!/bin/sh
+
+xrdb $HOME/.Xresources
+xsetroot -solid grey
+x-terminal-emulator -geometry 80x24+10+10 -ls -title "$VNCDESKTOP Desktop" &
+x-window-manager &
+
+bash ~/rapiro/chromium.sh &
+# Fix to make GNOME work
+export XKL_XMODMAP_DISABLE=1
+/etc/X11/Xsession
