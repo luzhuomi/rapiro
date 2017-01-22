@@ -260,6 +260,7 @@ ln -svnf /boot/rapiro.conf /home/pi/git/rapiro/rapiro.conf
 # add the following to /etc/rc.local , before any other command 
 /opt/vc/bin/tvservice -o
 
-
+# if you have yeelight to control
+sudo pip install yeelight
 
 
