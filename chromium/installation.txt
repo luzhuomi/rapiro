@@ -1,3 +1,4 @@
+# for pi 1
 add the following to /etc/apt/source.list
 
 deb http://mirrordirector.raspbian.org/raspbian/ jessie main contrib non-free rpi
@@ -14,4 +15,8 @@ wget http://ports.ubuntu.com/pool/universe/c/chromium-browser/chromium-codecs-ff
 sudo dpkg -i chromium-codecs-ffmpeg-dbg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb chromium-codecs-ffmpeg_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb
 sudo dpkg -i chromium-browser_45.0.2454.101-0ubuntu0.14.04.1.1099_armhf.deb chromium-browser-l10n_45.0.2454.101-0ubuntu0.14.04.1.1099_all.deb
 
+
+
+# for pi 2/3 jessie
+sudo apt-get install chromium-browser
 
