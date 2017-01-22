@@ -78,6 +78,12 @@ def index(q):
 			r.action(9)
 		elif query=="shutdown":
 			r.shutdown()
+		elif query=="turn off the light":
+			import smarthome
+			smarthub.turn_off()
+		elif query=="turn on the light":
+			import smarthome
+			smarthub.turn_on()
 		#elif query=="dance": # too dangerous
 		#	r.action(10)
 		else:
