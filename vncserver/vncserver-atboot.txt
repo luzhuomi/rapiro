@@ -54,6 +54,7 @@ exit 0
 
 2. sudo chmod +x /etc/init.d/vncserver
 3. sudo update-rc.d vncserver defaults
+sudo update-rc.d vncserver disable
 4. start vncserver once
 $ vncserver
 $ vncserver -kill :1
@@ -69,3 +70,11 @@ bash ~/rapiro/chromium.sh &
 # Fix to make GNOME work
 export XKL_XMODMAP_DISABLE=1
 /etc/X11/Xsession
+6 add 
+/etc/init.d/vncserver start to /etc/rc.local 
+
+e.g.
+(bash /home/pi/rapiro/runatstart.sh  >> /tmp/rapiro.log 2>&1) &
+/etc/init.d/vncserver start 
+
+# this will prevent the start up stuck segfault error.
